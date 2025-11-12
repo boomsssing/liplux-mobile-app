@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Download LipLux App - LipLux By Jay</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Download the LipLux mobile app for the best shopping experience">
+    <meta name="theme-color" content="#ff69b4">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="LipLux">
+    <link rel="manifest" href="manifest.json">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .download-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff69b4, #e91e63);
+            color: white;
+            padding: 2rem 0;
+        }
+        
+        .download-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 25px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .download-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .download-method {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .method-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .method-steps {
+            text-align: left;
+            margin: 1.5rem 0;
+        }
+        
+        .method-steps ol {
+            padding-left: 1.5rem;
+        }
+        
+        .method-steps li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        
+        .download-btn {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem 0.5rem;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .download-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .feature {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .qr-code {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .download-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="download-page">
+        <div class="download-container">
+            <div class="app-icon">
+                💋
+            </div>
+            
+            <h1 class="display-text">Download LipLux App</h1>
+            <p class="lead">Get the best mobile shopping experience for Ghana's premier lip gloss destination</p>
+            
+            <div class="download-methods">
+                <div class="download-method">
+                    <div class="method-icon">📱</div>
+                    <h3>Install from Website (Recommended)</h3>
+                    <div class="method-steps">
+                        <p><strong>For Android (Chrome/Edge):</strong></p>
+                        <ol>
+                            <li>Visit our website on your phone</li>
+                            <li>Look for "Install LipLux app" banner</li>
+                            <li>Tap "Install"</li>
+                            <li>App appears on your home screen!</li>
+                        </ol>
+                        
+                        <p><strong>For iPhone (Safari):</strong></p>
+                        <ol>
+                            <li>Visit our website in Safari</li>
+                            <li>Tap the Share button <i class="fas fa-share"></i></li>
+                            <li>Select "Add to Home Screen"</li>
+                            <li>Tap "Add" to confirm</li>
+                        </ol>
+                    </div>
+                    <a href="index.html" class="download-btn">
+                        <i class="fas fa-globe"></i> Visit Website
+                    </a>
+                </div>
+                
+                <div class="download-method">
+                    <div class="method-icon">📦</div>
+                    <h3>Download APK (Android Only)</h3>
+                    <div class="method-steps">
+                        <p><strong>Direct APK Installation:</strong></p>
+                        <ol>
+                            <li>Download the APK file below</li>
+                            <li>Go to Settings > Security</li>
+                            <li>Enable "Install from unknown sources"</li>
+                            <li>Open the downloaded APK file</li>
+                            <li>Follow installation prompts</li>
+                        </ol>
+                        <p><small><i class="fas fa-info-circle"></i> APK files allow you to install apps without Google Play Store</small></p>
+                    </div>
+                    <a href="#" class="download-btn" id="downloadApk">
+                        <i class="fas fa-download"></i> Download APK
+                    </a>
+                    <p><small>Version 1.0.0 • 5.2 MB</small></p>
+                </div>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Lightning Fast</h4>
+                    <p>Optimized for mobile performance</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h4>Native Feel</h4>
+                    <p>App-like experience on your phone</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <h4>Auto Updates</h4>
+                    <p>Always get the latest features</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📴</div>
+                    <h4>Works Offline</h4>
+                    <p>Browse products without internet</p>
+                </div>
+            </div>
+            
+            <div style="margin: 3rem 0;">
+                <h3>Scan QR Code to Install</h3>
+                <div class="qr-code">
+                    <canvas id="qrcode" width="150" height="150"></canvas>
+                </div>
+                <p><small>Scan with your phone camera to visit our website</small></p>
+            </div>
+            
+            <div style="margin: 3rem 0;">
+                <h3>Need Help?</h3>
+                <p>Having trouble installing the app? We're here to help!</p>
+                <a href="mailto:support@liplux.com" class="download-btn secondary">
+                    <i class="fas fa-envelope"></i> Contact Support
+                </a>
+                <a href="index.html" class="download-btn secondary">
+                    <i class="fas fa-home"></i> Back to Website
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple QR Code generator (basic implementation)
+        function generateQR() {
+            const canvas = document.getElementById('qrcode');
+            const ctx = canvas.getContext('2d');
+            const size = 150;
+            
+            // Simple QR-like pattern (for demo purposes)
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, size, size);
+            
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(10, 10, size-20, size-20);
+            
+            ctx.fillStyle = '#000';
+            // Create a simple pattern
+            for(let i = 0; i < 15; i++) {
+                for(let j = 0; j < 15; j++) {
+                    if((i + j) % 3 === 0) {
+                        ctx.fillRect(i * 10, j * 10, 8, 8);
+                    }
+                }
+            }
+            
+            // Add center text
+            ctx.fillStyle = '#ff69b4';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('LipLux', size/2, size/2);
+        }
+        
+        // Handle APK download
+        document.getElementById('downloadApk').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('APK file will be available once you generate it using the mobile app setup guide. For now, please use the "Install from Website" method above.');
+        });
+        
+        // Generate QR code on load
+        window.addEventListener('load', generateQR);
+        
+        // Auto-trigger install prompt if available
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                
+                // Show custom install button
+                const installBtn = document.createElement('button');
+                installBtn.className = 'download-btn';
+                installBtn.innerHTML = '<i class="fas fa-plus"></i> Install App Now';
+                installBtn.style.position = 'fixed';
+                installBtn.style.bottom = '20px';
+                installBtn.style.right = '20px';
+                installBtn.style.zIndex = '10000';
+                
+                installBtn.addEventListener('click', async () => {
+                    e.prompt();
+                    const { outcome } = await e.userChoice;
+                    if (outcome === 'accepted') {
+                        installBtn.remove();
+                    }
+                });
+                
+                document.body.appendChild(installBtn);
+            });
+        }
+    </script>
+</body>
+</html>

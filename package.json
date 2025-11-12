@@ -1,0 +1,60 @@
+{
+  "name": "liplux-mobile-app",
+  "version": "1.0.0",
+  "description": "LipLux By Jay - Mobile App for Ghana's premier lip gloss destination",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server . -p 3000 -c-1",
+    "build": "echo 'Build complete - files are ready for deployment'",
+    "install-capacitor": "npm install @capacitor/core @capacitor/cli @capacitor/android @capacitor/ios",
+    "cap-init": "npx cap init",
+    "cap-add-android": "npx cap add android",
+    "cap-add-ios": "npx cap add ios",
+    "cap-sync": "npx cap sync",
+    "cap-build-android": "npx cap build android",
+    "cap-open-android": "npx cap open android",
+    "cap-run-android": "npx cap run android",
+    "generate-apk": "npm run cap-sync && npm run cap-build-android",
+    "serve": "npx http-server . -p 8080 -c-1 -o",
+    "test-pwa": "npx http-server . -p 8080 -c-1 --cors"
+  },
+  "keywords": [
+    "lip-gloss",
+    "beauty",
+    "cosmetics",
+    "ghana",
+    "mobile-app",
+    "pwa",
+    "ecommerce"
+  ],
+  "author": "LipLux By Jay",
+  "license": "MIT",
+  "devDependencies": {
+    "@capacitor/cli": "^5.7.8",
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "@capacitor/android": "^5.7.8",
+    "@capacitor/app": "^5.0.6",
+    "@capacitor/core": "^5.7.8",
+    "@capacitor/ios": "^5.5.1",
+    "@capacitor/keyboard": "^5.0.6",
+    "@capacitor/splash-screen": "^5.0.6",
+    "@capacitor/status-bar": "^5.0.6",
+    "jszip": "^3.10.1"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "iOS >= 13",
+    "Android >= 7"
+  ],
+  "pwa": {
+    "name": "LipLux By Jay",
+    "short_name": "LipLux",
+    "theme_color": "#ff69b4",
+    "background_color": "#ff69b4",
+    "display": "standalone",
+    "start_url": "/"
+  },
+  "type": "commonjs"
+}

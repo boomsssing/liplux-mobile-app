@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test APK Download - LipLux</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff69b4, #e91e63);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        .btn {
+            background: white;
+            color: #ff69b4;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 1rem;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .success {
+            background: rgba(46, 204, 113, 0.3);
+            border: 2px solid #2ecc71;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Test LipLux APK Download</h1>
+        <p>Click the button below to test the direct APK download:</p>
+        
+        <button onclick="testAPKDownload()" class="btn">
+            📱 Download LipLux APK
+        </button>
+        
+        <div id="success" class="success">
+            ✅ <strong>APK download started!</strong><br>
+            Check your downloads folder for "LipLux-App.apk"
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px; font-size: 0.9rem;">
+            <strong>APK File Info:</strong><br>
+            📦 File: liplux-app.apk<br>
+            📏 Size: ~21 KB<br>
+            📱 Package: com.liplux.app<br>
+            🔢 Version: 1.0.0
+        </div>
+        
+        <div style="margin-top: 1rem;">
+            <a href="index.html" style="color: white; text-decoration: none;">
+                ← Back to LipLux Website
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function testAPKDownload() {
+            // Direct download of the APK file
+            const link = document.createElement('a');
+            link.href = 'liplux-app.apk';
+            link.download = 'LipLux-App.apk';
+            link.style.display = 'none';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show success message
+            document.getElementById('success').style.display = 'block';
+            
+            // Show installation instructions after a delay
+            setTimeout(() => {
+                alert(`APK Downloaded Successfully! 📱
+
+To install on Android:
+1. Open your Downloads folder
+2. Tap on "LipLux-App.apk"
+3. If prompted, enable "Install from unknown sources"
+4. Tap "Install" to complete setup
+5. Find LipLux app on your home screen!
+
+The app contains your full LipLux website as a native Android app.`);
+            }, 2000);
+        }
+        
+        // Check if APK file exists
+        fetch('liplux-app.apk', { method: 'HEAD' })
+            .then(response => {
+                if (response.ok) {
+                    console.log('✅ APK file is available for download');
+                } else {
+                    console.log('❌ APK file not found');
+                }
+            })
+            .catch(error => {
+                console.log('❌ Error checking APK file:', error);
+            });
+    </script>
+</body>
+</html>

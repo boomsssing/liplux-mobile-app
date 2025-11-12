@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Production builds
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Large image files (we'll optimize these)
+MG6859.jpg
+MG6908.jpg
+MG6878.jpg
+MG6875.jpg
+
+# Temporary files
+*.tmp
+*.temp
+
+# Logs
+*.log
+
+# APK files (we'll host these separately)
+*.apk
+
+# Large screenshots (we'll keep smaller versions)
+Screenshot*.png
+
+# Duplicate photos (keep only the best ones)
+PHOTO-2025-11-12-22-05-06 (1).jpg
+PHOTO-2025-11-12-22-05-07 (1).jpg
+PHOTO-2025-11-12-22-05-08 (1).jpg

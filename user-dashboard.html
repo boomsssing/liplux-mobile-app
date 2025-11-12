@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>My Account - LipLux By Jay</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#ff69b4">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="LipLux">
+    <link rel="manifest" href="manifest.json">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="34D5AF78-54DE-4B62-B538-7C3E2FC51EE6.png" alt="LipLux By Jay">
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#products">Shop</a>
+                    <a href="user-dashboard.html" class="active">My Account</a>
+                    <a href="track-order.html">Track Order</a>
+                </div>
+                <div class="nav-actions">
+                    <button type="button" class="btn-icon" id="userBtn" aria-label="User account">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <button type="button" class="btn-icon" id="cartBtn" aria-label="Shopping cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- User Dashboard -->
+    <div class="user-dashboard-page">
+        <div class="container">
+            <!-- User Info Header -->
+            <div class="user-header">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h1 id="userName">Welcome Back!</h1>
+                    <p id="userEmail"></p>
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="userLogout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+
+            <!-- Dashboard Tabs -->
+            <div class="dashboard-tabs">
+                <button type="button" class="dashboard-tab active" data-tab="orders">
+                    <i class="fas fa-shopping-bag"></i> My Orders
+                </button>
+                <button type="button" class="dashboard-tab" data-tab="profile">
+                    <i class="fas fa-user"></i> Profile
+                </button>
+                <button type="button" class="dashboard-tab" data-tab="addresses">
+                    <i class="fas fa-map-marker-alt"></i> Addresses
+                </button>
+            </div>
+
+            <!-- Orders Tab -->
+            <div class="dashboard-content active" id="ordersTab">
+                <div class="section-header-user">
+                    <h2>My Orders</h2>
+                    <div class="order-actions-header">
+                        <button type="button" class="btn btn-secondary" onclick="openTrackPackageModal()">
+                            <i class="fas fa-search"></i> Track Package
+                        </button>
+                        <button type="button" class="btn btn-outline" onclick="refreshOrders()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                        <div class="order-filters">
+                            <label for="userOrderFilter" class="sr-only">Filter Orders</label>
+                            <select id="userOrderFilter" class="filter-select" name="orderFilter" aria-label="Filter Orders">
+                                <option value="all">All Orders</option>
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                                <option value="shipped">Out for Delivery</option>
+                                <option value="delivered">Delivered</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="orders-grid" id="userOrdersGrid">
+                    <!-- Orders will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Profile Tab -->
+            <div class="dashboard-content" id="profileTab">
+                <div class="profile-card">
+                    <h2>Profile Information</h2>
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label for="profileName">Full Name</label>
+                            <input type="text" id="profileName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileEmail">Email</label>
+                            <input type="email" id="profileEmail" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profilePhone">Phone Number</label>
+                            <input type="tel" id="profilePhone" name="phone" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
+                </div>
+
+                <div class="profile-card">
+                    <h2>Change Password</h2>
+                    <form id="passwordForm">
+                        <div class="form-group">
+                            <label for="currentPassword">Current Password</label>
+                            <input type="password" id="currentPassword" name="currentPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPasswordProfile">New Password</label>
+                            <input type="password" id="newPasswordProfile" name="newPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPasswordProfile">Confirm New Password</label>
+                            <input type="password" id="confirmPasswordProfile" name="confirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Addresses Tab -->
+            <div class="dashboard-content" id="addressesTab">
+                <div class="section-header-user">
+                    <h2>Saved Addresses</h2>
+                    <button type="button" class="btn btn-primary" onclick="openAddAddressModal()">
+                        <i class="fas fa-plus"></i> Add Address
+                    </button>
+                </div>
+
+                <div class="addresses-grid" id="addressesGrid">
+                    <!-- Addresses will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div class="modal" id="orderDetailsModal">
+        <div class="modal-content large">
+            <button type="button" class="close-btn" onclick="closeOrderDetailsModal()" aria-label="Close order details">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="orderDetailsContent">
+                <!-- Order details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Address Modal -->
+    <div class="modal" id="addAddressModal">
+        <div class="modal-content">
+            <button type="button" class="close-btn" onclick="closeAddAddressModal()" aria-label="Close address modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Add New Address</h2>
+            <form id="addAddressForm">
+                <div class="form-group">
+                    <label for="addressLabel">Address Label</label>
+                    <input type="text" id="addressLabel" name="label" placeholder="e.g., Home, Work" required>
+                </div>
+                <div class="form-group">
+                    <label for="addressFull">Full Address</label>
+                    <textarea id="addressFull" name="fullAddress" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="addressCity">City</label>
+                    <input type="text" id="addressCity" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="addressPhone">Phone Number</label>
+                    <input type="tel" id="addressPhone" name="phone" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Save Address</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Track Package Modal -->
+    <div class="modal" id="trackPackageModal">
+        <div class="modal-content large">
+            <button type="button" class="close-btn" onclick="closeTrackPackageModal()" aria-label="Close track package modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Track Your Package</h2>
+            <form id="trackPackageForm">
+                <div class="form-group">
+                    <label for="trackingCode">Enter Tracking Code</label>
+                    <input type="text" id="trackingCode" name="trackingCode" placeholder="e.g., LL123456789" required>
+                    <small>You can find your tracking code in your order confirmation email or SMS.</small>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Track Package
+                </button>
+            </form>
+            
+            <!-- Tracking Results Area -->
+            <div id="trackingResults" class="tracking-results" style="display: none;">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Accra, Ghana</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Get Our App</h4>
+                    <p>Download for mobile devices</p>
+                    <div class="app-download-buttons">
+                        <button class="app-download-btn" id="downloadAppBtn">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Download App</span>
+                        </button>
+                        <a href="download-app.html" class="app-info-link">
+                            <i class="fas fa-info-circle"></i> How to Install
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="index.html">Home</a>
+                    <a href="index.html#products">Shop</a>
+                    <a href="track-order.html">Track Order</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LipLux By Jay. All rights reserved.</p>
+                <a href="admin.html" class="admin-link" title="Admin Portal">
+                    <i class="fas fa-shield-alt"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="products.js"></script>
+    <script src="cart.js"></script>
+    <script src="auth.js"></script>
+    <script src="user-dashboard.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

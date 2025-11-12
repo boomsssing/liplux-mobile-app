@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Test - LipLux</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-card {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .pass { background: #d4edda; color: #155724; }
+        .fail { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 4px solid #007bff;
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <h1>LipLux PWA Test Results</h1>
+    <p>This page tests if your LipLux website is properly configured as a Progressive Web App.</p>
+    
+    <div class="test-card">
+        <h3>📱 PWA Requirements Check</h3>
+        <div id="test-results"></div>
+    </div>
+    
+    <div class="test-card">
+        <h3>🔧 Installation Instructions</h3>
+        <div id="install-instructions"></div>
+    </div>
+
+    <script>
+        const tests = [
+            {
+                name: 'Service Worker Support',
+                test: () => 'serviceWorker' in navigator,
+                description: 'Browser supports service workers'
+            },
+            {
+                name: 'Manifest File',
+                test: async () => {
+                    try {
+                        const response = await fetch('/manifest.json');
+                        return response.ok;
+                    } catch {
+                        return false;
+                    }
+                },
+                description: 'PWA manifest file is accessible'
+            },
+            {
+                name: 'Service Worker File',
+                test: async () => {
+                    try {
+                        const response = await fetch('/sw.js');
+                        return response.ok;
+                    } catch {
+                        return false;
+                    }
+                },
+                description: 'Service worker file is accessible'
+            },
+            {
+                name: 'HTTPS or Localhost',
+                test: () => location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1',
+                description: 'Running on secure context (required for PWA)'
+            },
+            {
+                name: 'Install Prompt Available',
+                test: () => window.deferredPrompt !== undefined,
+                description: 'Browser install prompt is available'
+            }
+        ];
+
+        async function runTests() {
+            const resultsDiv = document.getElementById('test-results');
+            
+            for (const test of tests) {
+                const result = await test.test();
+                const statusClass = result ? 'pass' : 'fail';
+                const statusText = result ? 'PASS' : 'FAIL';
+                
+                resultsDiv.innerHTML += `
+                    <div class="test-result">
+                        <strong>${test.name}</strong>
+                        <span class="status ${statusClass}">${statusText}</span>
+                        <br><small>${test.description}</small>
+                    </div>
+                `;
+            }
+            
+            // Add overall status
+            const allPassed = (await Promise.all(tests.map(t => t.test()))).every(Boolean);
+            const overallStatus = allPassed ? 'All tests passed! Your PWA is ready.' : 'Some tests failed. Check the issues above.';
+            const overallClass = allPassed ? 'pass' : 'warning';
+            
+            resultsDiv.innerHTML += `
+                <div class="test-result">
+                    <strong>Overall Status</strong>
+                    <span class="status ${overallClass}">${overallStatus}</span>
+                </div>
+            `;
+        }
+
+        function showInstructions() {
+            const instructionsDiv = document.getElementById('install-instructions');
+            
+            instructionsDiv.innerHTML = `
+                <h4>For Users to Install Your App:</h4>
+                
+                <h5>📱 Android (Chrome/Edge):</h5>
+                <ol>
+                    <li>Visit your website on mobile Chrome or Edge</li>
+                    <li>Look for "Install" banner at bottom of screen</li>
+                    <li>Tap "Install" button</li>
+                    <li>App will be added to home screen</li>
+                </ol>
+                
+                <h5>🍎 iPhone (Safari):</h5>
+                <ol>
+                    <li>Open your website in Safari</li>
+                    <li>Tap the Share button (square with arrow)</li>
+                    <li>Scroll down and tap "Add to Home Screen"</li>
+                    <li>Tap "Add" to confirm</li>
+                </ol>
+                
+                <h5>💻 Desktop (Chrome/Edge):</h5>
+                <ol>
+                    <li>Visit your website</li>
+                    <li>Look for install icon in address bar</li>
+                    <li>Click install icon or use browser menu</li>
+                    <li>App will be installed like desktop software</li>
+                </ol>
+                
+                <h4>📦 APK Generation (Advanced):</h4>
+                <p>To create an APK file for direct download:</p>
+                <ol>
+                    <li>Install Node.js and Android Studio</li>
+                    <li>Run: <code>npm install</code></li>
+                    <li>Run: <code>npm run install-capacitor</code></li>
+                    <li>Run: <code>npm run cap-add-android</code></li>
+                    <li>Run: <code>npm run cap-open-android</code></li>
+                    <li>Build APK in Android Studio</li>
+                </ol>
+                
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <strong>💡 Recommendation:</strong> Use the PWA installation method (first option) as it's easier for users and automatically updates when you make changes to your website.
+                </div>
+            `;
+        }
+
+        // Run tests when page loads
+        window.addEventListener('load', () => {
+            runTests();
+            showInstructions();
+        });
+
+        // Listen for install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            window.deferredPrompt = e;
+            
+            // Re-run tests to update install prompt status
+            setTimeout(runTests, 100);
+            
+            // Show install button
+            const installBtn = document.createElement('button');
+            installBtn.textContent = '📱 Install LipLux App Now';
+            installBtn.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #ff69b4;
+                color: white;
+                border: none;
+                padding: 15px 20px;
+                border-radius: 25px;
+                cursor: pointer;
+                font-weight: bold;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                z-index: 1000;
+            `;
+            
+            installBtn.addEventListener('click', async () => {
+                e.prompt();
+                const { outcome } = await e.userChoice;
+                if (outcome === 'accepted') {
+                    installBtn.remove();
+                }
+            });
+            
+            document.body.appendChild(installBtn);
+        });
+    </script>
+</body>
+</html>
